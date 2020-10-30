@@ -129,12 +129,14 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         {
             self.datePicker = [self buildDatePicker];
             [self.containerView addSubview:self.datePicker];
+            
             if (@available(iOS 13.4, *)) {
                 [_datePicker setPreferredDatePickerStyle:UIDatePickerStyleWheels];
             } else {
                 // Fallback on earlier versions
             }
             _containerView.backgroundColor = [UIColor whiteColor];
+            
             
             if (_datePickerMode == UIDatePickerModeDate) {
                 //add day name
@@ -303,11 +305,22 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
     ((UILabel*)[self.headerView viewWithTag:100]).textColor = (brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor];
     
+    
+    NSString * language = [[NSLocale preferredLanguages] firstObject];
+    
+    BOOL isRTL = [language isEqualToString:@"ar"];
+    
+    UIFont *font = isRTL ? [UIFont fontWithName:@"GESSTextLight-Light" size:15.0] : [UIFont fontWithName:@"OpenSans-Regular" size:15.0];
+    
+    ((UILabel*)[self.headerView viewWithTag:100]).font = font;
+    
     [((UIButton*)[self.footerview viewWithTag:100]) setTitleColor: (brightness < 0.75) ? color : [UIColor blackColor] forState:UIControlStateNormal];
+    ((UIButton*)[self.footerview viewWithTag:100]).titleLabel.font = font;
     [((UIButton*)[self.footerview viewWithTag:100]) setTitleColor: (brightness < 0.75) ? [color colorWithAlphaComponent:0.5] : [UIColor blackColor] forState:UIControlStateHighlighted];
     
     [((UIButton*)[self.footerview viewWithTag:200]) setTitleColor:(brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor] forState:UIControlStateNormal];
     [((UIButton*)[self.footerview viewWithTag:200]) setTitleColor:(brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor] forState:UIControlStateHighlighted];
+    ((UIButton*)[self.footerview viewWithTag:200]).titleLabel.font = font;
     ((UIButton*)[self.footerview viewWithTag:200]).backgroundColor = color;
 }
 
@@ -783,7 +796,13 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
     view.backgroundColor = self.headerBackgroundColor;
     
-    UIFont *headerFont = self.headerTitleFont == nil ? [UIFont systemFontOfSize:18.0] : self.headerTitleFont;
+    NSString * language = [[NSLocale preferredLanguages] firstObject];
+    
+    BOOL isRTL = [language isEqualToString:@"ar"];
+    
+    UIFont *font = isRTL ? [UIFont fontWithName:@"GESSTextMedium-Medium" size:17.0] : [UIFont fontWithName:@"OpenSans-SemiBold" size:17.0];
+    
+    UIFont *headerFont = font;//self.headerTitleFont == nil ? [UIFont systemFontOfSize:18.0] : self.headerTitleFont;
     
     NSDictionary *dict = @{
         NSForegroundColorAttributeName: self.headerTitleColor,
@@ -809,6 +828,15 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     search.font = [UIFont systemFontOfSize:16];
     search.textColor = mainColor ? mainColor : mainFAPickerColor;
     search.tintColor = mainColor ? mainColor : mainFAPickerColor;
+    
+    NSString * language = [[NSLocale preferredLanguages] firstObject];
+    
+    BOOL isRTL = [language isEqualToString:@"ar"];
+    
+    UIFont *font = isRTL ? [UIFont fontWithName:@"GESSTextLight-Light" size:15.0] : [UIFont fontWithName:@"OpenSans-Regular" size:15.0];
+    
+    search.font = font;
+    
     search.returnKeyType = UIReturnKeyDone;
     search.delegate = self;
     search.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -1123,15 +1151,17 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellIdentifier];
     }
     
-    [cell.textLabel setFont:[UIFont systemFontOfSize:16]];
-    
     
     NSString * language = [[NSLocale preferredLanguages] firstObject];
     BOOL isRTL = [language isEqualToString:@"ar"];
-
+    UIFont *font = isRTL ? [UIFont fontWithName:@"GESSTextLight-Light" size:15.0] : [UIFont fontWithName:@"OpenSans-Regular" size:15.0];
+    
+    [cell.textLabel setFont:font];
     
     [cell.textLabel setNumberOfLines:2];
-
+    // self.semanticContentAttribute == UISemanticContentAttributeForceRightToLeft ||
+    //[UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
+    
     FAPickerItem* item;
     
     if (_filterItem) {
@@ -2015,4 +2045,5 @@ CustomViewContainerHeight:(float)height
 }
 
 @end
+
 
