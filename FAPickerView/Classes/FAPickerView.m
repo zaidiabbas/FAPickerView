@@ -310,7 +310,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
     BOOL isRTL = [language isEqualToString:@"ar"];
     
-    UIFont *font = isRTL ? [UIFont fontWithName:@"GESSTextLight-Light" size:15.0] : [UIFont fontWithName:@"OpenSans-Regular" size:15.0];
+    UIFont *font = [UIFont systemFontOfSize:15.0];
     
     ((UILabel*)[self.headerView viewWithTag:100]).font = font;
     
@@ -800,8 +800,8 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
     BOOL isRTL = [language isEqualToString:@"ar"];
     
-    UIFont *font = isRTL ? [UIFont fontWithName:@"GESSTextMedium-Medium" size:17.0] : [UIFont fontWithName:@"OpenSans-SemiBold" size:17.0];
-    
+    UIFont *font = [UIFont systemFontOfSize:15.0];
+
     UIFont *headerFont = font;//self.headerTitleFont == nil ? [UIFont systemFontOfSize:18.0] : self.headerTitleFont;
     
     NSDictionary *dict = @{
@@ -833,8 +833,8 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
     BOOL isRTL = [language isEqualToString:@"ar"];
     
-    UIFont *font = isRTL ? [UIFont fontWithName:@"GESSTextLight-Light" size:15.0] : [UIFont fontWithName:@"OpenSans-Regular" size:15.0];
-    
+    UIFont *font = [UIFont systemFontOfSize:15.0];
+
     search.font = font;
     
     search.returnKeyType = UIReturnKeyDone;
@@ -1154,8 +1154,8 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
     NSString * language = [[NSLocale preferredLanguages] firstObject];
     BOOL isRTL = [language isEqualToString:@"ar"];
-    UIFont *font = isRTL ? [UIFont fontWithName:@"GESSTextLight-Light" size:15.0] : [UIFont fontWithName:@"OpenSans-Regular" size:15.0];
-    
+    UIFont *font = [UIFont systemFontOfSize:15.0];
+
     [cell.textLabel setFont:font];
     
     [cell.textLabel setNumberOfLines:2];
